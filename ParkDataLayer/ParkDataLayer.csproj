@@ -6,11 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Mappers\**" />
-    <Compile Remove="Model\**" />
     <EmbeddedResource Remove="Mappers\**" />
-    <EmbeddedResource Remove="Model\**" />
     <None Remove="Mappers\**" />
-    <None Remove="Model\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +16,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ParkBusinessLayer\ParkBusinessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Mapper\" />
   </ItemGroup>
 
 </Project>
