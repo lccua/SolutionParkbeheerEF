@@ -49,29 +49,38 @@ namespace ConsoleAppModelTest
 
             #endregion
 
+            #region HUURDERS
+
+            IHuurderRepository hurepo = new HuurderRepositoryEF(ctx);
+            BeheerHuurders huurdersBeheerder = new BeheerHuurders(hurepo);
+
+            // POST
+            Contactgegevens contactgegevens = new Contactgegevens("testmail", "testtel", "testadres");
+            huurdersBeheerder.VoegNieuweHuurderToe("testnaam",contactgegevens);
+
+            // GET            
+
+            // PUT
+
+            // DELETE
+
+            #endregion
+
             #region HUIZEN
 
             IHuizenRepository hrepo = new HuizenRepositoryEF(ctx);
             BeheerHuizen huizenBeheerder = new BeheerHuizen(hrepo);
 
-            #region POST
+            // POST
             Park park = new Park("p1", "testpark", "testlocatie");
             huizenBeheerder.VoegNieuwHuisToe("garenstraat", 5, park);
-            #endregion
 
-            #region GET
+            // GET            
 
-            #endregion
+            // PUT
 
-            #region PUT
-            huizenBeheerder.UpdateHuis()
+            // DELETE
 
-            #endregion
-
-            #region DELETE
-
-
-            #endregion
             #endregion
 
         }
