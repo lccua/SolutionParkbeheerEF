@@ -12,7 +12,6 @@ namespace ParkDataLayer.Model
     public class HuisEF
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get;  set; }
 
         public string Straat { get;  set; }

@@ -42,7 +42,9 @@ namespace ParkDataLayer.Repositories
         {
             try
             {
-                return _context.Huizen.Any(h => h.Straat == straat && h.Nr == nummer && h.Park.Id == park.Id);
+                return _context.Huizen.Any(     h => h.Straat == straat 
+                                             && h.Nr == nummer 
+                                             && h.Park.Id == park.Id);
 
             }
             catch (Exception ex)

@@ -60,12 +60,11 @@ namespace ConsoleAppModelTest
             #endregion
 
             #region GET
-            huizenBeheerder.GeefHuis()
 
             #endregion
 
             #region PUT
-
+            huizenBeheerder.UpdateHuis()
 
             #endregion
 
