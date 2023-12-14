@@ -10,7 +10,7 @@ namespace ParkDataLayer.Mapper
 {
     public class HuurcontractMapper
     {
-        public static Huurcontract ToOrderDetail(HuurcontractEF huurcontractEF)
+        public static Huurcontract ToHuurcontract(HuurcontractEF huurcontractEF)
         {
             return new Huurcontract(
                 huurcontractEF.Id,

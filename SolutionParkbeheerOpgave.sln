@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkBusinessLayer", "ParkBu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkDataLayer", "ParkDataLayer\ParkDataLayer.csproj", "{A8ACEC7C-9673-4DC3-8295-EB665550024C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkConsoleApp", "ParkConsoleApp\ParkConsoleApp.csproj", "{02182B17-506D-4BD4-8710-0A15229DF206}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkUtil", "ParkUtil\ParkUtil.csproj", "{E9D7361D-124F-4837-BF31-E4B5979F8279}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{A8ACEC7C-9673-4DC3-8295-EB665550024C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8ACEC7C-9673-4DC3-8295-EB665550024C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8ACEC7C-9673-4DC3-8295-EB665550024C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02182B17-506D-4BD4-8710-0A15229DF206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02182B17-506D-4BD4-8710-0A15229DF206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02182B17-506D-4BD4-8710-0A15229DF206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02182B17-506D-4BD4-8710-0A15229DF206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D7361D-124F-4837-BF31-E4B5979F8279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D7361D-124F-4837-BF31-E4B5979F8279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D7361D-124F-4837-BF31-E4B5979F8279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D7361D-124F-4837-BF31-E4B5979F8279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
