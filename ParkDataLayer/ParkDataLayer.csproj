@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ParkBusinessLayer\ParkBusinessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapper\" />
-  </ItemGroup>
-
 </Project>
