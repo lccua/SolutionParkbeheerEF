@@ -59,9 +59,9 @@ namespace ConsoleAppModelTest
 
             Huurperiode huurPeriode = new Huurperiode(DateTime.Now, 10);
 
-            Huurder huurder3 = new Huurder(3, "gert", new Contactgegevens("email1", "tel", "adres"));
+            Huurder huurder3 = new Huurder( "gert", new Contactgegevens("email1", "tel", "adres"));
             Park park4 = new Park("p4", "Buitenhoeve", "Deinze");
-            Huis huis2 = new Huis(4, "Kerkstraat", 4, true, park4);
+            Huis huis2 = new Huis("Kerkstraat", 4, park4);
 
 
 

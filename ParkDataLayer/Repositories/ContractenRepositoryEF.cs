@@ -40,6 +40,9 @@ namespace ParkDataLayer.Repositories
             try
             {
                 var huurcontract = _context.Huurcontracten
+                                           .Include(h => h.Huis)  // Include the related Huis
+                                           .Include(h => h.Huurder)  // Include the related Huurder
+                                           .Include(h => h.Huis.Park)
                                            .Where(c => c.Id == id)
                                            .Select(contractEF => HuurcontractMapper.ToHuurcontract(contractEF))
                                            .FirstOrDefault(); 
@@ -142,12 +145,16 @@ namespace ParkDataLayer.Repositories
 
             try
             {
+        
+
+
                 HuurcontractEF huurcontractEF = HuurcontractMapper.ToHuurcontractEF(contract);
 
                 _context.Huurcontracten.Add(huurcontractEF);
 
                 _context.SaveChanges();
 
+          
             }
             catch (Exception ex)
             {
