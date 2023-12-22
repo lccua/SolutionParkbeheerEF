@@ -24,9 +24,10 @@ namespace ParkDataLayer.Repositories
             try
             {
                 var huis = _context.Huizen
-                           .Where(c => c.Id == id)
-                           .Select(huisEF => HuisMapper.ToHuis(huisEF))
-                           .FirstOrDefault();
+                                       .Include(h => h.Park)  // Include the related Park
+                                       .Where(c => c.Id == id)
+                                       .Select(huisEF => HuisMapper.ToHuis(huisEF))
+                                       .FirstOrDefault();
 
                 return huis;
             }
@@ -109,9 +110,22 @@ namespace ParkDataLayer.Repositories
             {
                 HuisEF huisEF = HuisMapper.ToHuisEF(huis);
 
-                _context.Huizen.Add(huisEF);
+                // If an ID is provided, use it; otherwise, let the database generate it.
+                if (huis.Id <= 0)
+                {
+                    // ID is not provided or is 0; let the database generate it.
+                    _context.Huizen.Add(huisEF);
+                }
+                else
+                {
+                    // ID is provided; add the entity with the given ID.
+                    _context.Huizen.Add(huisEF);
+                    _context.Entry(huisEF).State = EntityState.Added; // Explicitly mark as added.
+                }
 
                 _context.SaveChanges();
+                _context.Entry(huisEF).State = EntityState.Detached;
+
 
             }
             catch (Exception ex)

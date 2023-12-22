@@ -126,7 +126,18 @@ namespace ParkDataLayer.Repositories
             {
                 HuurderEF huurderEF = HuurderMapper.ToHuurderEF(huurder);
 
-                _context.Huurders.Add(huurderEF);
+                // If an ID is provided, use it; otherwise, let the database generate it.
+                if (huurder.Id <= 0)
+                {
+                    // ID is not provided or is 0; let the database generate it.
+                    _context.Huurders.Add(huurderEF);
+                }
+                else
+                {
+                    // ID is provided; add the entity with the given ID.
+                    _context.Huurders.Add(huurderEF);
+                }
+
 
                 _context.SaveChanges();
 

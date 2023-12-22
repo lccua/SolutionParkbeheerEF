@@ -13,75 +13,66 @@ namespace ConsoleAppModelTest
     {
         static void Main(string[] args)
         {
+
+            // Initialize the context and ensure database is created
+            #region Database Initialization
             ParkbeheerContext ctx = new ParkbeheerContext();
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
-
-            #region HUURCONTRACTEN
-
-            IContractenRepository crepo = new ContractenRepositoryEF(ctx);
-            BeheerContracten contractBeheerder = new BeheerContracten(crepo);
-
-            #region POST
-            Huurperiode huurperiode = new Huurperiode(DateTime.Now, 10);
-            Huurder huurder = new Huurder(2, "Jos", new Contactgegevens("email1", "tel", "adres"));
-            Huis huis = new Huis(1, "Kerkstraat", 5, true, new Park("p1", "Buitenhoeve", "Deinze"));
-            contractBeheerder.MaakContract("c2", huurperiode, huurder, huis);
             #endregion
 
-            #region GET
-            DateTime beginDatum = new DateTime(2023, 10, 12);
-            DateTime eindDatum = new DateTime(2024, 10, 12);
-            contractBeheerder.GeefContracten(beginDatum, eindDatum);
+            // Repository and management for houses
+            #region Beheer Huizen
+            IHuizenRepository huizenRepository = new HuizenRepositoryEF(ctx);
+            BeheerHuizen beheerHuizen = new BeheerHuizen(huizenRepository);
+
+            Park park1 = new Park("p1", "test1", "Gent");
+            Park park2 = new Park("p2", "test2", "Gent");
+            Park park3 = new Park("p3", "test3", "Gent");
+
+
+            beheerHuizen.VoegNieuwHuisToe("parklaan", 1, park1);
+            beheerHuizen.VoegNieuwHuisToe("parklaan", 2, park2);
+            beheerHuizen.VoegNieuwHuisToe("parklaan", 3, park3);
+
+            Huis huis1 = beheerHuizen.GeefHuis(1);
+            huis1.ZetStraat("Kerkstraat");
+            huis1.ZetNr(11);
+            beheerHuizen.UpdateHuis(huis1);
+            beheerHuizen.ArchiveerHuis(huis1);
             #endregion
 
-            #region PUT
-            Huurperiode huurperiodeUpdate = new Huurperiode(DateTime.Now, 10);
-            Huurder huurderUpdate = new Huurder(2, "update", new Contactgegevens("update", "update", "update"));
-            Huis huisUpdate = new Huis(1, "update", 5, true, new Park("p1", "update", "update"));
-            Huurcontract huurcontractUpdate = new Huurcontract("c2", huurperiodeUpdate, huurderUpdate, huisUpdate);
-            contractBeheerder.UpdateContract(huurcontractUpdate);
+
+            // Repository and management for renters
+            #region Beheer Huurders
+            IHuurderRepository huurderRepository = new HuurderRepositoryEF(ctx);
+            BeheerHuurders beheerHuurders = new BeheerHuurders(huurderRepository);
+
+            beheerHuurders.VoegNieuweHuurderToe("jos", new Contactgegevens("email1", "tel", "adres"));
+            beheerHuurders.VoegNieuweHuurderToe("jef", new Contactgegevens("email2", "tel", "adres"));
             #endregion
 
-            #region DELETE
-            //contractBeheerder.AnnuleerContract(huurcontractUpdate);
+            // Repository and management for contracts
+            #region Beheer Contracten
+            IContractenRepository contractenRepository = new ContractenRepositoryEF(ctx);
+            BeheerContracten beheerContracten = new BeheerContracten(contractenRepository);
+
+            Huurperiode huurPeriode = new Huurperiode(DateTime.Now, 10);
+
+            Huurder huurder3 = new Huurder(3, "gert", new Contactgegevens("email1", "tel", "adres"));
+            Park park4 = new Park("p4", "Buitenhoeve", "Deinze");
+            Huis huis2 = new Huis(4, "Kerkstraat", 4, true, park4);
+
+
+
+            beheerContracten.MaakContract("c2", huurPeriode, huurder3, huis2);
+
+            Huurcontract huurcontract = beheerContracten.GeefContract("c2");
             #endregion
 
-            #endregion
 
-            #region HUURDERS
 
-            IHuurderRepository hurepo = new HuurderRepositoryEF(ctx);
-            BeheerHuurders huurdersBeheerder = new BeheerHuurders(hurepo);
 
-            // POST
-            Contactgegevens contactgegevens = new Contactgegevens("testmail", "testtel", "testadres");
-            huurdersBeheerder.VoegNieuweHuurderToe("testnaam",contactgegevens);
-
-            // GET            
-
-            // PUT
-
-            // DELETE
-
-            #endregion
-
-            #region HUIZEN
-
-            IHuizenRepository hrepo = new HuizenRepositoryEF(ctx);
-            BeheerHuizen huizenBeheerder = new BeheerHuizen(hrepo);
-
-            // POST
-            Park park = new Park("p1", "testpark", "testlocatie");
-            huizenBeheerder.VoegNieuwHuisToe("garenstraat", 5, park);
-
-            // GET            
-
-            // PUT
-
-            // DELETE
-
-            #endregion
 
         }
     }

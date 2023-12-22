@@ -29,7 +29,7 @@ namespace ParkBusinessLayer.Beheerders
                 throw new BeheerderException("", ex);
             }
         }
-        public void AnnuleerContract(Huurcontract contract )
+        public void AnnuleerContract(Huurcontract contract)
         {
             try
             {
