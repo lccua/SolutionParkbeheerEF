@@ -10,9 +10,11 @@ namespace ParkDataLayer.Model
 {
     public class ParkEF
     {
+
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         private string naam;
         public string Naam
@@ -38,16 +40,7 @@ namespace ParkDataLayer.Model
             }
         }
 
-        private List<HuisEF> _huis;
-        public List<HuisEF> Huis
-        {
-            get { return _huis; }
-            set
-            {
-                if (value == null || !value.Any())
-                    throw new ModelException("Huis list cannot be null or empty.");
-                _huis = value;
-            }
-        }
+        public List<HuisEF> _huis { get; set; }
+        
     }
 }

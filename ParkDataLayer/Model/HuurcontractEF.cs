@@ -8,9 +8,11 @@ namespace ParkDataLayer.Model
 {
     public class HuurcontractEF
     {
+     
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         private DateTime startDatum;
         public DateTime StartDatum

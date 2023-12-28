@@ -9,9 +9,10 @@ namespace ParkDataLayer.Model
 {
     public class HuurderEF
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto-generate IDs
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         private string naam;
         public string Naam

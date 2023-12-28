@@ -12,9 +12,12 @@ namespace ParkDataLayer.Model
 {
     public class HuisEF
     {
+      
+
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get;  set; }
+        public int Id { get; set; }
 
         private string straat;
         public string Straat
@@ -54,17 +57,7 @@ namespace ParkDataLayer.Model
             }
         }
 
-        private Dictionary<HuurderEF, List<HuurcontractEF>> _huurcontracten;
-        public Dictionary<HuurderEF, List<HuurcontractEF>> Huurcontracten
-        {
-            get { return _huurcontracten; }
-            set
-            {
-                if (value == null)
-                    throw new ModelException("Huurcontracten cannot be null.");
-                _huurcontracten = value;
-            }
-        }
+        private Dictionary<HuurderEF, List<HuurcontractEF>> _huurcontracten { get; set; }
 
     }
 }
