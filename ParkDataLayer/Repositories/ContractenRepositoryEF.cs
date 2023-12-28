@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using ParkDataLayer.Exceptions;
 
 namespace ParkDataLayer.Repositories
 {
@@ -28,10 +29,10 @@ namespace ParkDataLayer.Repositories
                 _context.Huurcontracten.Remove(huurcontractEF);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: AnnuleerContract", ex);
+
             }
         }
 
@@ -49,10 +50,10 @@ namespace ParkDataLayer.Repositories
 
                 return huurcontract;
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: GeefContract", ex);
+
             }
         }
 
@@ -68,12 +69,12 @@ namespace ParkDataLayer.Repositories
 
                 return huurcontracten;
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: GeefContracten", ex);
+
             }
-            
+
         }
 
         public bool HeeftContract(DateTime startDatum, int huurderid, int huisid)
@@ -85,10 +86,10 @@ namespace ParkDataLayer.Repositories
                    contract.Huurder.Id == huurderid &&
                    contract.Huis.Id == huisid);
             }
-            catch (Exception  ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: HeeftContract", ex);
+
             }
         }
 
@@ -99,10 +100,10 @@ namespace ParkDataLayer.Repositories
                 return _context.Huurcontracten.Any(contract => contract.Id == id);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: HeeftContract", ex);
+
             }
         }
 
@@ -128,10 +129,10 @@ namespace ParkDataLayer.Repositories
 
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: UpdateContract", ex);
+
             }
         }
 
@@ -156,10 +157,10 @@ namespace ParkDataLayer.Repositories
 
           
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("ContractenRepositoryEF: VoegContractToe", ex);
+
             }
         }
     }

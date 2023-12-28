@@ -63,16 +63,11 @@ namespace ConsoleAppModelTest
             Park park4 = new Park("p4", "Buitenhoeve", "Deinze");
             Huis huis2 = new Huis("Kerkstraat", 4, park4);
 
-
-
             beheerContracten.MaakContract("c2", huurPeriode, huurder3, huis2);
 
             Huurcontract huurcontract = beheerContracten.GeefContract("c2");
+            Console.WriteLine(huurcontract);
             #endregion
-
-
-
-
 
         }
     }

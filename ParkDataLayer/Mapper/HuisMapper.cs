@@ -1,10 +1,7 @@
 ﻿using ParkBusinessLayer.Model;
 using ParkDataLayer.Model;
+using ParkDataLayer.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkDataLayer.Mapper
 {
@@ -12,20 +9,33 @@ namespace ParkDataLayer.Mapper
     {
         public static Huis ToHuis(HuisEF huisEF)
         {
-
-            return new Huis(huisEF.Id, huisEF.Straat, huisEF.Nr, huisEF.Actief, ParkMapper.ToPark(huisEF.Park));
+            try
+            {
+                return new Huis(huisEF.Id, huisEF.Straat, huisEF.Nr, huisEF.Actief, ParkMapper.ToPark(huisEF.Park));
+            }
+            catch (MapperException ex) 
+            {
+                throw new MapperException("Error mapping HuisEF to Huis.", ex);
+            }
         }
 
         public static HuisEF ToHuisEF(Huis huis)
         {
-            return new HuisEF()
+            try
             {
-                Id = huis.Id,
-                Straat = huis.Straat,
-                Nr = huis.Nr,
-                Actief = huis.Actief,
-                Park = ParkMapper.ToParkEF(huis.Park),
-            };
+                return new HuisEF()
+                {
+                    Id = huis.Id,
+                    Straat = huis.Straat,
+                    Nr = huis.Nr,
+                    Actief = huis.Actief,
+                    Park = ParkMapper.ToParkEF(huis.Park),
+                };
+            }
+            catch (MapperException ex) 
+            {
+                throw new MapperException("Error mapping Huis to HuisEF.", ex);
+            }
         }
     }
 }

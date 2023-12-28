@@ -1,10 +1,7 @@
 ﻿using ParkBusinessLayer.Model;
 using ParkDataLayer.Model;
+using ParkDataLayer.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkDataLayer.Mapper
 {
@@ -12,19 +9,37 @@ namespace ParkDataLayer.Mapper
     {
         public static Huurder ToHuurder(HuurderEF huurderEF)
         {
-            return new Huurder(huurderEF.Id, huurderEF.Naam, new Contactgegevens(huurderEF.Email, huurderEF.Tel, huurderEF.Adres));
+            try
+            {
+                return new Huurder(
+                    huurderEF.Id,
+                    huurderEF.Naam,
+                    new Contactgegevens(huurderEF.Email, huurderEF.Tel, huurderEF.Adres)
+                );
+            }
+            catch (Exception ex) 
+            {
+                throw new MapperException("Error mapping HuurderEF to Huurder.", ex);
+            }
         }
 
         public static HuurderEF ToHuurderEF(Huurder huurder)
         {
-            return new HuurderEF()
+            try
             {
-                Id = huurder.Id,
-                Naam = huurder.Naam,
-                Email = huurder.Contactgegevens.Email,
-                Tel = huurder.Contactgegevens.Tel,
-                Adres = huurder.Contactgegevens.Adres
-            };
+                return new HuurderEF()
+                {
+                    Id = huurder.Id,
+                    Naam = huurder.Naam,
+                    Email = huurder.Contactgegevens.Email,
+                    Tel = huurder.Contactgegevens.Tel,
+                    Adres = huurder.Contactgegevens.Adres
+                };
+            }
+            catch (Exception ex) 
+            {
+                throw new MapperException("Error mapping Huurder to HuurderEF.", ex);
+            }
         }
     }
 }

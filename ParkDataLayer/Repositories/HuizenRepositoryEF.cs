@@ -2,6 +2,7 @@
 using ParkBusinessLayer.Interfaces;
 using ParkBusinessLayer.Model;
 using ParkDataLayer.Context;
+using ParkDataLayer.Exceptions;
 using ParkDataLayer.Mapper;
 using ParkDataLayer.Model;
 using System;
@@ -31,10 +32,10 @@ namespace ParkDataLayer.Repositories
 
                 return huis;
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuizenRepositoryEF: GeefHuis", ex);
+
             }
 
         }
@@ -48,11 +49,11 @@ namespace ParkDataLayer.Repositories
                                              && h.Park.Id == park.Id);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
-            }           
+                throw new RepositoryException("HuizenRepositoryEF: HeeftHuis", ex);
+
+            }
         }
 
 
@@ -63,10 +64,10 @@ namespace ParkDataLayer.Repositories
                 return _context.Huizen.Any(h => h.Id == id);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuizenRepositoryEF: HeeftHuis", ex);
+
             }
         }
 
@@ -92,10 +93,10 @@ namespace ParkDataLayer.Repositories
 
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuizenRepositoryEF: UpdateHuis", ex);
+
             }
         }
 
@@ -128,10 +129,10 @@ namespace ParkDataLayer.Repositories
 
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuizenRepositoryEF: VoegHuisToe", ex);
+
             }
         }
     }

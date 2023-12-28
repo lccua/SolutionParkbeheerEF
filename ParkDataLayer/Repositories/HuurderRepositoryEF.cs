@@ -2,6 +2,7 @@
 using ParkBusinessLayer.Interfaces;
 using ParkBusinessLayer.Model;
 using ParkDataLayer.Context;
+using ParkDataLayer.Exceptions;
 using ParkDataLayer.Mapper;
 using ParkDataLayer.Model;
 using System;
@@ -31,10 +32,10 @@ namespace ParkDataLayer.Repositories
 
                 return huurder;
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: GeefHuurder", ex);
+
             }
         }
 
@@ -49,10 +50,10 @@ namespace ParkDataLayer.Repositories
 
                 return huurders;
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: GeefHuurders", ex);
+
             }
         }
 
@@ -65,10 +66,10 @@ namespace ParkDataLayer.Repositories
                                              && h.Email == contact.Email);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: HeeftHuurder", ex);
+
             }
         }
 
@@ -79,10 +80,10 @@ namespace ParkDataLayer.Repositories
                 return _context.Huurders.Any(h => h.Id == id);
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: HeeftHuurder", ex);
+
             }
         }
 
@@ -108,10 +109,10 @@ namespace ParkDataLayer.Repositories
 
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: UpdateHuurder", ex);
+
             }
         }
 
@@ -142,10 +143,10 @@ namespace ParkDataLayer.Repositories
                 _context.SaveChanges();
 
             }
-            catch (Exception ex)
+            catch (RepositoryException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                throw new RepositoryException("HuurderRepositoryEF: VoegHuurderToe", ex);
+
             }
         }
     }

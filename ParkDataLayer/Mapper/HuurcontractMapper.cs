@@ -1,10 +1,7 @@
 ﻿using ParkBusinessLayer.Model;
 using ParkDataLayer.Model;
+using ParkDataLayer.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkDataLayer.Mapper
 {
@@ -12,24 +9,39 @@ namespace ParkDataLayer.Mapper
     {
         public static Huurcontract ToHuurcontract(HuurcontractEF huurcontractEF)
         {
-            return new Huurcontract(
-                huurcontractEF.Id,
-                new Huurperiode(huurcontractEF.StartDatum, huurcontractEF.Aantaldagen),
-                HuurderMapper.ToHuurder(huurcontractEF.Huurder),
-                HuisMapper.ToHuis(huurcontractEF.Huis)
+            try
+            {
+                return new Huurcontract(
+                    huurcontractEF.Id,
+                    new Huurperiode(huurcontractEF.StartDatum, huurcontractEF.Aantaldagen),
+                    HuurderMapper.ToHuurder(huurcontractEF.Huurder),
+                    HuisMapper.ToHuis(huurcontractEF.Huis)
                 );
+            }
+            catch (MapperException ex) 
+            {
+                throw new MapperException("Error mapping HuurcontractEF to Huurcontract.", ex);
+            }
         }
+
         public static HuurcontractEF ToHuurcontractEF(Huurcontract huurcontract)
         {
-            return new HuurcontractEF()
+            try
             {
-                Id = huurcontract.Id,
-                StartDatum = huurcontract.Huurperiode.StartDatum,
-                EindDatum = huurcontract.Huurperiode.EindDatum,
-                Aantaldagen = huurcontract.Huurperiode.Aantaldagen,
-                Huurder = HuurderMapper.ToHuurderEF(huurcontract.Huurder),
-                Huis = HuisMapper.ToHuisEF(huurcontract.Huis),
-            };
+                return new HuurcontractEF()
+                {
+                    Id = huurcontract.Id,
+                    StartDatum = huurcontract.Huurperiode.StartDatum,
+                    EindDatum = huurcontract.Huurperiode.EindDatum,
+                    Aantaldagen = huurcontract.Huurperiode.Aantaldagen,
+                    Huurder = HuurderMapper.ToHuurderEF(huurcontract.Huurder),
+                    Huis = HuisMapper.ToHuisEF(huurcontract.Huis),
+                };
+            }
+            catch (MapperException ex) 
+            {
+                throw new MapperException("Error mapping Huurcontract to HuurcontractEF.", ex);
+            }
         }
     }
 }
